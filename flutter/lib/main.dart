@@ -1,19 +1,19 @@
+import 'daily_news/services/api_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:untitled/screens/home.dart';
-import 'package:alan_voice/alan_voice.dart';
+import 'daily_news/components/customListTile.dart';
+import 'daily_news/model/article_model.dart';
+import 'daily_news/newsscreen.dart';
+import 'home.dart';
 
 void main() {
-  runApp(Iris());
+  runApp(MyApp());
 }
 
-class Iris extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Color(0XFFFFFFFF),
-      ),
       home: MyHomePage(),
     );
   }
