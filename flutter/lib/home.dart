@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'obj_detect.dart';
@@ -133,10 +134,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return ImageCaptioningPage();
-                }),
+              onTap: () async{
+                await availableCameras().then(
+                      (value)=>Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=>ImageCaptioningPage(cameras:value,),
+                    ),
+                  ),
                 );
               },
               child: Container(

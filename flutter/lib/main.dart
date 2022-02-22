@@ -1,11 +1,10 @@
 import 'daily_news/services/api_service.dart';
 import 'package:flutter/material.dart';
-import 'daily_news/components/customListTile.dart';
-import 'daily_news/model/article_model.dart';
-import 'daily_news/newsscreen.dart';
+import 'package:camera/camera.dart';
 import 'home.dart';
 
-void main() {
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
