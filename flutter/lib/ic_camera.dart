@@ -1,8 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
-import 'dart:async';
+//import 'dart:async';
 import 'package:NewsApp/displaypicture.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 
 class ImageCaptioningPage extends StatefulWidget {
@@ -15,8 +19,30 @@ class ImageCaptioningPage extends StatefulWidget {
 
 class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
   late CameraController controller;
+  String? message= "";
   XFile? pictureFile;
+  var url=Uri.parse("https://imgcapflask.herokuapp.com/predict");
   // late Future<void> _initializeControllerFuture;
+  uploadImage(File img) async{
+    final request=http.MultipartRequest("POST",url);
+    //final headers={"Content-type":"multipart/form-data"};
+    request.files.add(http.MultipartFile('image',img.readAsBytes().asStream(),
+        img.lengthSync(),filename: img.path.split("/").last));
+    // http.StreamedResponse response=await request.send();
+    http.StreamedResponse streamedResponse = await request.send();
+    http.Response response = await http.Response.fromStream(streamedResponse);
+    //latest added code
+    final resJson=jsonDecode(response.body);
+    message=resJson['message'];
+    print(response.statusCode);
+    print(message);
+  }
+  // Future getData()async{
+  //   final response=await http.get(url);
+  //   if(response.statusCode==200){
+  //     setState(() {});
+  //   }
+  // }
 
   @override
   void initState() {
@@ -39,73 +65,86 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    if (!controller.value.isInitialized) {
-      return const SizedBox(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-    return Scaffold(
-      appBar: AppBar(
-          title: Text('Iris'),
-          leading: CircleAvatar(
-            radius: 40,
-            backgroundImage: AssetImage('images/Iris_logo.jpeg'),
+  // Future getData() async{
+  //   final response=await http.get(url);
+  //   if(response).statusCode==200){
+  //     setState ((){});
+  //   }
+  // }
+
+    @override
+    Widget build(BuildContext context) {
+      if (!controller.value.isInitialized) {
+        return const SizedBox(
+          child: Center(
+            child: CircularProgressIndicator(),
           ),
-          backgroundColor: Color(0xff060921)),
-      body: Center(
-          child: Column(
-          children: [
-          Padding(
-          padding: const EdgeInsets.all(8.0),
-      child: Center(
-        child: SizedBox(
-          height: 400,
-          width: 400,
-          child: CameraPreview(controller),
-        ),
-      ),
-    ),
-    Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: ElevatedButton(
-    onPressed: () async {
-    pictureFile = await controller.takePicture();
-    // Navigator.push(context, MaterialPageRoute(builder: (context){
-    // return DisplayPicture(imagePath: pictureFile!.path);
-    // }));
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context)=>DisplayPicture(imagePath: pictureFile!.path,))
-    );
-    setState(() {});
-    },
-    child: const Text('Capture Image'),
-    ),
-    ),
-    if (pictureFile != null)
-    Image.file(File(pictureFile!.path),
-    height: 200,
-    width: 400,),
-    ButtonTheme(
-    minWidth: 300,
-    height: 80,
-    child: RaisedButton(
-    onPressed: () {},
-    color: Color(0xffA1AFFF),
-    shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(100)),
-    child: Text(
-    'Describe',
-    style: TextStyle(fontSize: 30),
-    ),
-    ),
-    ),
-    ],
-    ),
-    ));
+        );
+      }
+      return Scaffold(
+          appBar: AppBar(
+              title: Text('Iris'),
+              leading: CircleAvatar(
+                radius: 40,
+                backgroundImage: AssetImage('images/Iris_logo.jpeg'),
+              ),
+              backgroundColor: Color(0xff060921)),
+          body: Center(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: SizedBox(
+                      height: 400,
+                      width: 400,
+                      child: CameraPreview(controller),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      pictureFile = await controller.takePicture();
+                      File file = File(pictureFile!.path);
+                      await uploadImage(file);
+                      //Image img= Image.file(file);
+                      //String path=directory.path;
+                      //final String fileName=basename(img.path);
+                      //final String imgpath=file.path;
+                      //final File localImg=await file.copy('$imgpath/.jpg');
+
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) =>
+                              DisplayPicture(imagePath: pictureFile!.path,))
+                      );
+                      setState(() {});
+                    },
+                    child: const Text('Capture Image'),
+                  ),
+                ),
+                if (pictureFile != null)
+                  Image.file(File(pictureFile!.path),
+                    height: 200,
+                    width: 400,),
+                // ButtonTheme(
+                //   minWidth: 300,
+                //   height: 80,
+                //   child: RaisedButton(
+                //     onPressed: () {},
+                //     color: Color(0xffA1AFFF),
+                //     shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(100)),
+                //     child: Text(
+                //       'Describe',
+                //       style: TextStyle(fontSize: 30),
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+          ));
+    }
   }
-}
 
