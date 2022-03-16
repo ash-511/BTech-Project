@@ -19,7 +19,7 @@ class ImageCaptioningPage extends StatefulWidget {
 
 class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
   late CameraController controller;
-  String? message= "";
+  String message= "";
   XFile? pictureFile;
   var url=Uri.parse("https://imgcapflask.herokuapp.com/predict");
   // late Future<void> _initializeControllerFuture;
@@ -37,13 +37,6 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
     print(response.statusCode);
     print(message);
   }
-  // Future getData()async{
-  //   final response=await http.get(url);
-  //   if(response.statusCode==200){
-  //     setState(() {});
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -64,13 +57,6 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
     controller.dispose();
     super.dispose();
   }
-
-  // Future getData() async{
-  //   final response=await http.get(url);
-  //   if(response).statusCode==200){
-  //     setState ((){});
-  //   }
-  // }
 
     @override
     Widget build(BuildContext context) {
@@ -109,15 +95,9 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
                       pictureFile = await controller.takePicture();
                       File file = File(pictureFile!.path);
                       await uploadImage(file);
-                      //Image img= Image.file(file);
-                      //String path=directory.path;
-                      //final String fileName=basename(img.path);
-                      //final String imgpath=file.path;
-                      //final File localImg=await file.copy('$imgpath/.jpg');
-
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) =>
-                              DisplayPicture(imagePath: pictureFile!.path,))
+                              DisplayPicture(imagePath: pictureFile!.path, message: message,))
                       );
                       setState(() {});
                     },
