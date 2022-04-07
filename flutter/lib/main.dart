@@ -5,7 +5,7 @@ import 'home.dart';
 import 'ic_camera.dart';
 import 'daily_news/newsscreen.dart';
 import 'obj_detect.dart';
-import 'text_detection.dart';
+import 'text_detection/screen1.dart';
 import 'package:alan_voice/alan_voice.dart';
 
 void main(){
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         '/imgcap':(context)=> const ImageCaptioningPage(),
         '/dailynews':(context)=> DailyNewsPage(),
         '/objdetect':(context)=> const ObjectDetectionPage(),
-        '/detecttext':(context)=> const TextDetectionPage(),
+        '/detecttext':(context)=> TextDetection(),
       },
     );
   }

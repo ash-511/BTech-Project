@@ -22,7 +22,7 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
   String message= "";
   XFile? pictureFile;
   var url=Uri.parse("https://imgcapflask.herokuapp.com/predict");
-  // late Future<void> _initializeControllerFuture;
+
   uploadImage(File img) async{
     final request=http.MultipartRequest("POST",url);
     //final headers={"Content-type":"multipart/form-data"};

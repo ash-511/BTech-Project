@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'obj_detect.dart';
 import 'ic_camera.dart';
-import 'text_detection.dart';
+import 'text_detection/screen1.dart';
 import 'daily_news/newsscreen.dart';
 import 'package:alan_voice/alan_voice.dart';
 
@@ -67,10 +67,12 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return ObjectDetectionPage();
-                }),
+              onTap: () async{
+                await availableCameras().then(
+                      (value)=>Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=>ObjectDetectionPage(cameras:value,),
+                    ),
+                  ),
                 );
               },
               child: Container(
@@ -123,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
             GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return TextDetectionPage();
+                  return TextDetection();
                 }),
                 );
               },

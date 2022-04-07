@@ -23,6 +23,7 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -34,6 +35,11 @@ android {
 
     lintOptions {
         disable 'InvalidPackage'
+    }
+
+    aaptOptions {
+        noCompress 'tflite'
+        noCompress 'lite'
     }
 
     defaultConfig {
@@ -52,6 +58,17 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    packagingOptions {
+        pickFirst '**/*.so'
+        pickFirst 'lib/armeabi-v7a/libblasV8.so'
+        pickFirst 'lib/mips/librsjni.so'
+        pickFirst 'lib/x86/libblasV8.so'
+        pickFirst 'lib/mips/libRSSupport.so'
+        pickFirst 'lib/mips/libblasV8.so'
+    }
+
+
 }
 
 flutter {
@@ -60,4 +77,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:29.2.1')
 }

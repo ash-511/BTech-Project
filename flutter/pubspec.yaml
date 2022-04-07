@@ -24,8 +24,12 @@ dependencies:
   flutter_tts: ^3.3.3
   flutter:
     sdk: flutter
-  camera: ^0.9.4+1
-  alan_voice: 3.0.0
+#  camera: ^0.9.4+16
+  camera: ^0.9.4+3
+  alan_voice: ^3.3.0
+#  image_picker: ^0.6.7+17
+  image_picker: ^0.8.4+3
+  google_ml_kit: ^0.7.3
   path_provider:
   path:
 
@@ -53,6 +57,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/Iris_logo.jpeg
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

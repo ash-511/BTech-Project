@@ -52,7 +52,7 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
             // );
             return Column(
               children: [
-                ElevatedButton(onPressed: () async {await _speak(" ");} ,
+                ElevatedButton(onPressed: () async {await _speak("");} ,
                     child: Text("Speak")),
                 Expanded(child:ListView.builder(
                   //Now let's create our custom List tile

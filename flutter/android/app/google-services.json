@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "430000790971",
+    "project_id": "trial1-af253",
+    "storage_bucket": "trial1-af253.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430000790971:android:60a0d81b201fc8032f389e",
+        "android_client_info": {
+          "package_name": "com.example.NewsApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430000790971-qpnc0m3rt97fdpukhthnmmp1l94t7oda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiq_ET3jf-L9tYjY7bfbzUiioPTkq4LdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430000790971-qpnc0m3rt97fdpukhthnmmp1l94t7oda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430000790971:android:1fe6488a23f4ed742f389e",
+        "android_client_info": {
+          "package_name": "com.example.text_recognition_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430000790971-qpnc0m3rt97fdpukhthnmmp1l94t7oda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiq_ET3jf-L9tYjY7bfbzUiioPTkq4LdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430000790971-qpnc0m3rt97fdpukhthnmmp1l94t7oda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
