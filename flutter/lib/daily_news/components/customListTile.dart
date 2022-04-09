@@ -1,17 +1,9 @@
 import 'package:NewsApp/daily_news/model/article_model.dart';
-import 'package:NewsApp/daily_news/pages/articles_details_page.dart';
 import 'package:flutter/material.dart';
 
 Widget customListTile(Article article, BuildContext context) {
   return InkWell(
-    onTap: () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ArticlePage(
-                    article: article,
-                  )));
-    },
+    onTap: () {},
     child: Container(
       margin: EdgeInsets.all(12.0),
       padding: EdgeInsets.all(8.0),

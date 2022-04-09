@@ -12,10 +12,12 @@ class DailyNewsPage extends StatefulWidget {
 class _DailyNewsPageState extends State<DailyNewsPage> {
   ApiService client = ApiService();
   FlutterTts flutterTts = FlutterTts();
+
   String? news;
 
   @override
   Future _speak(String text) async{
+    await flutterTts.setSpeechRate(0.4);
     await flutterTts.speak(text);
   }
   @override
@@ -38,15 +40,23 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
           if (snapshot.hasData) {
             //Now let's make a list of articles
             List<Article>? articles = snapshot.data;
-            
-            for (var news in articles!) {
-              print(news);
-            }
+            // for (var news in articles!) {
+            //   print(news);
+            // }
             //news=articles?articles[0].title:"hello";
             if (articles==null){
               return Container(
               );
             }
+
+            String news="1.";
+
+            for (var i=0;i<8;i++){
+              int c=i+2;
+              news=news+articles[i].title;
+              news=news+c.toString();
+            }
+
             //return
             // ListView.builder(
             // //Now let's create our custom List tile
@@ -56,14 +66,14 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
             // );
             return Column(
               children: [
-                ElevatedButton(onPressed: () async {await _speak("");} ,
+                ElevatedButton(onPressed: () async {await _speak(news);} ,
                     child: Text("Speak")),
                 Expanded(child:ListView.builder(
                   //Now let's create our custom List tile
                   itemCount: articles.length,
                   itemBuilder: (context, index) =>
                       customListTile(articles[index], context),
-                ),),
+                ),)
               ],
             );
           }
