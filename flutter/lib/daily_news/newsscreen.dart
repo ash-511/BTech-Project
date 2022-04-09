@@ -13,12 +13,13 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
   ApiService client = ApiService();
   FlutterTts flutterTts = FlutterTts();
   String? news;
+
+  @override
+  Future _speak(String text) async{
+    await flutterTts.speak(text);
+  }
   @override
   Widget build(BuildContext context) {
-
-    Future _speak(String text) async{
-      await flutterTts.speak(text);
-    }
     // @override
     // String toString() {
     //   return 'Article':{source: ${source}, title:${title}}
@@ -29,7 +30,7 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
         backgroundColor: Colors.white,
       ),
 
-      //Now let's call the APi services with futurebuilder widget
+      //Now let's call the APi services with future builder widget
       body: FutureBuilder(
         future: client.getArticle(),
         builder: (BuildContext context, AsyncSnapshot<List<Article>> snapshot) {
@@ -37,7 +38,10 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
           if (snapshot.hasData) {
             //Now let's make a list of articles
             List<Article>? articles = snapshot.data;
-            for (var news in articles!) print(news);
+            
+            for (var news in articles!) {
+              print(news);
+            }
             //news=articles?articles[0].title:"hello";
             if (articles==null){
               return Container(

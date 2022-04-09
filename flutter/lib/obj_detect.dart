@@ -15,30 +15,35 @@ class ObjectDetectionPage extends StatefulWidget {
 
 class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
   late CameraController controller;
-  String message= "hello";
+  List<dynamic> message=[];
+  String res="";
   XFile? pictureFile;
-
-
-  var url=Uri.parse("http://127.0.0.1:5000/upload");
-  //var url=Uri.parse("https://imgcapflask.herokuapp.com/predict");
-
+  var url=Uri.parse("https://objdetflask.herokuapp.com/upload");
 
   uploadImage(File img) async{
     final request=http.MultipartRequest("POST",url);
     //final headers={"Content-type":"multipart/form-data"};
-    request.files.add(http.MultipartFile('image',img.readAsBytes().asStream(),
+    request.files.add(http.MultipartFile('file',img.readAsBytes().asStream(),
         img.lengthSync(),filename: img.path.split("/").last));
-    // http.StreamedResponse response=await request.send();
     http.StreamedResponse streamedResponse = await request.send();
     http.Response response = await http.Response.fromStream(streamedResponse);
 
     final resJson=jsonDecode(response.body);
+
     print('${resJson.runtimeType} : $resJson');
     //Map<String, dynamic> user = resJson;
     //print('first message, ${user['objects_count']}!');
     //message=resJson["objects_count"];
-    print(response.statusCode);
+    print("hell0");
+    print('$resJson');
+    message=resJson['detections'];
     print(message);
+    for(var i in message){
+      res=res+i+",";
+    }
+    print("hello2");
+    print(response.statusCode);
+    print(res);
   }
   @override
   void initState() {
@@ -100,7 +105,7 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
                     await uploadImage(file);
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) =>
-                            ODDisplayPicture(imagePath: pictureFile!.path, message: message,))
+                            ODDisplayPicture(imagePath: pictureFile!.path, message: res,))
                     );
                     setState(() {});
                   },
