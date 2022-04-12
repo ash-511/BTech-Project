@@ -1,8 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'obj_detect.dart';
-import 'ic_camera.dart';
+import 'object_detection/obj_detect.dart';
+import 'Image Captioning/ic_camera.dart';
 import 'text_detection/screen1.dart';
 import 'daily_news/newsscreen.dart';
 import 'package:alan_voice/alan_voice.dart';

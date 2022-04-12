@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'screen2.dart';
 
-
 class TextDetection extends StatefulWidget {
   @override
   _TextDetectionState createState() => _TextDetectionState();
@@ -48,11 +47,6 @@ class _TextDetectionState extends State<TextDetection> {
   }
 
   Future scanText() async {
-    // showDialog(
-    //     context: context,
-    //     child: Center(
-    //       child: CircularProgressIndicator(),
-    //     ));
     final inputImage = InputImage.fromFile(File(_image!.path));
     final textDetector = GoogleMlKit.vision.textDetector();
     final RecognisedText recognisedText = await textDetector.processImage(inputImage);

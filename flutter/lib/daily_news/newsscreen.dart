@@ -53,8 +53,8 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
 
             for (var i=0;i<8;i++){
               int c=i+2;
-              news=news+articles[i].title;
-              news=news+c.toString();
+              news=news+articles[i].title + ".";
+              news=news+c.toString()+" . ";
             }
 
             //return

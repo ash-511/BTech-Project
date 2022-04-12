@@ -2,9 +2,9 @@ import 'daily_news/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'home.dart';
-import 'ic_camera.dart';
+import 'Image Captioning/ic_camera.dart';
 import 'daily_news/newsscreen.dart';
-import 'obj_detect.dart';
+import 'object_detection/obj_detect.dart';
 import 'text_detection/screen1.dart';
 import 'package:alan_voice/alan_voice.dart';
 
