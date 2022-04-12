@@ -1,12 +1,9 @@
-import 'daily_news/services/api_service.dart';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 import 'home.dart';
 import 'Image Captioning/ic_camera.dart';
 import 'daily_news/newsscreen.dart';
 import 'object_detection/obj_detect.dart';
 import 'text_detection/screen1.dart';
-import 'package:alan_voice/alan_voice.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,16 +11,16 @@ void main(){
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
       initialRoute: '/',
       routes: {
-        '/imgcap':(context)=> const ImageCaptioningPage(),
+        '/imgcap':(context)=> ImageCaptioningPage(),
         '/dailynews':(context)=> DailyNewsPage(),
-        '/objdetect':(context)=> const ObjectDetectionPage(),
+        '/objdetect':(context)=> ObjectDetectionPage(),
         '/detecttext':(context)=> TextDetection(),
       },
     );

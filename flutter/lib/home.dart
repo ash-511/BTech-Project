@@ -19,29 +19,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
     String sdkKey = "6c174bba7c1414e273b170053db7be702e956eca572e1d8b807a3e2338fdd0dc/stage";
 
-    void _navigateTo(String screen) {
-      switch (screen) {
-        case "obj_detect":
-          Navigator.pushNamed(context, '/objdetect');
-          break;
-        case "img_cap":
-          Navigator.pushNamed(context, '/imgcap');
-          break;
-        case "text_detect":
-          Navigator.pushNamed(context, '/detecttext');
-          break;
-        case "daily_news":
-          Navigator.pushNamed(context, '/dailynews');
-          break;
-        case "home":
-          Navigator.pushNamed(context, '/');
-          break;
-      }
-    }
     void _handleCommand(Map<String, dynamic> command) {
       switch (command["command"]) {
         case "obj_detect":
-          _navigateTo(command["route"]);
+          Navigator.pushNamed(context,'/objdetect');
+          break;
+        case "img_cap":
+          Navigator.pushNamed(context,'/imgcap');
+          break;
+        case "txt_detect":
+          Navigator.pushNamed(context,'/detecttext');
+          break;
+        case "daily_news":
+          Navigator.pushNamed(context,'/dailynews');
+          break;
+        case "home":
+          Navigator.pop(context);
           break;
         default:
           debugPrint("Unknown command: ${command}");
