@@ -5,9 +5,6 @@ import 'package:NewsApp/Image%20Captioning/displaypicture.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:http/http.dart' as http;
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-
 
 class ImageCaptioningPage extends StatefulWidget {
   final List<CameraDescription>? cameras;

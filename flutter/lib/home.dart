@@ -19,13 +19,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
     String sdkKey = "6c174bba7c1414e273b170053db7be702e956eca572e1d8b807a3e2338fdd0dc/stage";
 
-    void _handleCommand(Map<String, dynamic> command) {
+    Future<void> _handleCommand(Map<String, dynamic> command) async {
       switch (command["command"]) {
         case "obj_detect":
-          Navigator.pushNamed(context,'/objdetect');
+          //Navigator.pushNamed(context,'/objdetect');
+            await availableCameras().then(
+                  (value)=>Navigator.push(context,
+                MaterialPageRoute(builder: (context)=>ObjectDetectionPage(cameras:value,),
+                ),
+              ),
+            );
           break;
         case "img_cap":
-          Navigator.pushNamed(context,'/imgcap');
+          //Navigator.pushNamed(context,'/imgcap');
+          await availableCameras().then(
+                  (value)=>Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=>ImageCaptioningPage(cameras:value,),
+                  ),
+              ),
+          );
           break;
         case "txt_detect":
           Navigator.pushNamed(context,'/detecttext');

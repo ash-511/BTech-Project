@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/objdetect':(context)=> ObjectDetectionPage(),
         '/detecttext':(context)=> TextDetection(),
       },
+      //onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
