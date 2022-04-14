@@ -13,6 +13,22 @@ class _DetailsState extends State<Details> {
   //String res="";
 
   @override
+  void initState() {
+    //you are not allowed to add async modifier to initState
+    Future.delayed(Duration.zero,() async {
+      //your async 'await' codes goes here
+      await flutterTts.speak(widget.text);
+    });
+    super.initState();
+  }
+
+  // Future<void> initState() async {
+  //   super.initState();
+  //   await flutterTts.speak(widget.text);
+  //
+  // }
+
+
   Future _speak(String text) async{
     await flutterTts.speak(text);
   }
@@ -35,7 +51,7 @@ class _DetailsState extends State<Details> {
               child: SelectableText(
                   widget.text.isEmpty ? 'No Text Available' : widget.text),
             ),
-            ElevatedButton(onPressed: () async {await _speak(widget.text);}, child: Text("Speak"),)
+
           ],
         )
     );
