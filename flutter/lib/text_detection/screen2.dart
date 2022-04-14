@@ -14,9 +14,7 @@ class _DetailsState extends State<Details> {
 
   @override
   void initState() {
-    //you are not allowed to add async modifier to initState
     Future.delayed(Duration.zero,() async {
-      //your async 'await' codes goes here
       await flutterTts.speak(widget.text);
     });
     super.initState();

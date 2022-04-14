@@ -17,7 +17,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   _MyHomePageState() {
 
-    String sdkKey = "6c174bba7c1414e273b170053db7be702e956eca572e1d8b807a3e2338fdd0dc/stage";
+    String sdkKey = "f4b5ec72bdd281a7780bdbb62601ddf42e956eca572e1d8b807a3e2338fdd0dc/stage";
 
     Future<void> _handleCommand(Map<String, dynamic> command) async {
       switch (command["command"]) {

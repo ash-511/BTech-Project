@@ -90,7 +90,7 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: SizedBox(
-                    height: 400,
+                    height: 500,
                     width: 400,
                     child: CameraPreview(controller),
                   ),
