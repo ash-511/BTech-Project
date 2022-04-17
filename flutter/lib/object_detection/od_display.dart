@@ -15,10 +15,11 @@ class _ODDisplayPictureState extends State<ODDisplayPicture> {
 
   FlutterTts flutterTts = FlutterTts();
 
+  String s="Objects Detected: ";
   @override
   void initState() {
     Future.delayed(Duration.zero,() async {
-      await flutterTts.speak(widget.message);
+      await flutterTts.speak(s+widget.message);
     });
     super.initState();
   }

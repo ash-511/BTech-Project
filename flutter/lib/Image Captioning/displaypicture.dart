@@ -15,7 +15,6 @@ class _DisplayPictureState extends State<DisplayPicture> {
 
   FlutterTts flutterTts = FlutterTts();
 
-
   @override
   void initState() {
     Future.delayed(Duration.zero,() async {
