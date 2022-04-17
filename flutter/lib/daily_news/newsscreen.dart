@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'components/customListTile.dart';
 import 'model/article_model.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:alan_voice/alan_voice.dart';
+
 
 class DailyNewsPage extends StatefulWidget {
   @override
@@ -18,26 +19,10 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
 
   @override
   Future _speak(String text) async{
+    await flutterTts.setVoice({"name": "Karen", "locale": "en-AU"});
     await flutterTts.setSpeechRate(0.4);
     await flutterTts.speak(text);
   }
-
-  _DailyNewsPageState(){
-    String sdkKey = "f4b5ec72bdd281a7780bdbb62601ddf42e956eca572e1d8b807a3e2338fdd0dc/stage";
-
-    Future<void> _readNews(Map<String, dynamic> command) async {
-      switch (command["command"]) {
-        case "news":
-          await _speak(news);
-          break;
-        default:
-          debugPrint("Unknown command: ${command}");
-      }
-    }
-    AlanVoice.addButton(sdkKey,buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
-    AlanVoice.onCommand.add((command) => _readNews(command.data));
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,11 +54,10 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
               news=news+articles[i].title + ".";
               news=news+c.toString()+" . ";
             }
+            _speak(news);
 
             return Column(
               children: [
-                ElevatedButton(onPressed: () async {await _speak(news);} ,
-                    child: Text("Speak")),
                 Expanded(child:ListView.builder(
                   //Now let's create our custom List tile
                   itemCount: articles.length,

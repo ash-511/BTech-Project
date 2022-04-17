@@ -127,12 +127,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return TextDetection();
-                }),
-                );
-              },
+              onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context){
+                return TextDetection();}));
+                },
               child: Container(
                 width: 250,
                 height: 70,

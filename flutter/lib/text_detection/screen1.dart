@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'screen2.dart';
 import 'package:alan_voice/alan_voice.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class TextDetection extends StatefulWidget {
   @override
@@ -19,24 +21,24 @@ class _TextDetectionState extends State<TextDetection> {
     Future<void> _handleCommand(Map<String, dynamic> command) async {
       switch (command["command"]) {
         case 'scan':
-          //Future scanText() async {
-            final inputImage = InputImage.fromFile(File(_image!.path));
-            final textDetector = GoogleMlKit.vision.textDetector();
-            final RecognisedText recognisedText = await textDetector.processImage(inputImage);
+        //Future scanText() async {
+          final inputImage = InputImage.fromFile(File(_image!.path));
+          final textDetector = GoogleMlKit.vision.textDetector();
+          final RecognisedText recognisedText = await textDetector.processImage(inputImage);
 
-            for (TextBlock block in recognisedText.blocks) {
-              for (TextLine line in block.lines)
-              {
-                for (TextElement element in line.elements) {
-                  result = result + '  ' + element.text;
-                }
-                result = result + ' ';
+          for (TextBlock block in recognisedText.blocks) {
+            for (TextLine line in block.lines)
+            {
+              for (TextElement element in line.elements) {
+                result = result + '  ' + element.text;
               }
+              result = result + ' ';
             }
-            //print("inside scan");
-            Navigator.of(context).pop();
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Details(result)));
+          }
+          //print("inside scan");
+          Navigator.of(context).pop();
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => Details(result)));
           //}
           break;
         default:
@@ -51,6 +53,20 @@ class _TextDetectionState extends State<TextDetection> {
   String result="";
   PickedFile? _image;
   final picker = ImagePicker();
+  FlutterTts flutterTts = FlutterTts();
+  String instruction="The image will be captured in a few seconds. After the image is captured, press the alan AI button on the bottom left corner of the screen and give the command, scan.";
+
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(milliseconds: 10000), () async{
+      getImage();
+      setState(() {});
+    });
+    flutterTts.setSpeechRate(0.4);
+    flutterTts.speak(instruction);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +86,7 @@ class _TextDetectionState extends State<TextDetection> {
             File(_image!.path),
             fit: BoxFit.fitWidth,
           )
-              : Container(),
+              : Container(child: Text(instruction),),
         ));
   }
   Future getImage() async {
