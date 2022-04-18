@@ -32,7 +32,6 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
     // http.StreamedResponse response=await request.send();
     http.StreamedResponse streamedResponse = await request.send();
     http.Response response = await http.Response.fromStream(streamedResponse);
-    //latest added code
     final resJson=jsonDecode(response.body);
     message=resJson['message'];
     print(response.statusCode);
@@ -82,7 +81,7 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
       }
       return Scaffold(
           appBar: AppBar(
-              title: Text('Iris'),
+              title: Text('Image Captioning'),
               leading: CircleAvatar(
                 radius: 40,
                 backgroundImage: AssetImage('images/Iris_logo.jpeg'),
@@ -95,7 +94,7 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: SizedBox(
-                      height: 700,
+                      height: 710,
                       width: 500,
                       child: CameraPreview(controller),
                     ),

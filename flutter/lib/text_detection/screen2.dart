@@ -37,7 +37,12 @@ class _DetailsState extends State<Details> {
     return Scaffold(
         key: _key,
         appBar: AppBar(
-          title: Text('Details'),
+          title: Text('Text Recognition'),
+            backgroundColor: Color(0XFF040045),
+            leading: CircleAvatar(
+              radius: 40,
+              backgroundImage: AssetImage('images/Iris_logo.jpeg'),
+            )
         ),
         body: Column(
           children: [

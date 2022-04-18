@@ -39,9 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
           );
           break;
-        case "txt_detect":
-          Navigator.pushNamed(context,'/detecttext');
-          break;
+        // case "txt_detect":
+        //   Navigator.pushNamed(context,'/detecttext');
+        //   break;
         case "daily_news":
           Navigator.pushNamed(context,'/dailynews');
           break;
@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Color(0XFF040045),
           leading: CircleAvatar(
             radius: 40,
-            backgroundImage: AssetImage('Iris_logo.jpeg'),
+            backgroundImage: AssetImage('images/Iris_logo.jpeg'),
           )),
       body: Center(
         child: Column(
@@ -127,9 +127,17 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             GestureDetector(
-              onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context){
-                return TextDetection();}));
-                },
+              onTap: () async{
+                await availableCameras().then(
+                      (value)=>Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=>TextDetection(cameras:value,),
+                    ),
+                  ),
+                );
+              },
+              // {Navigator.push(context, MaterialPageRoute(builder: (context){
+              //   return TextDetection();}));
+              //   },
               child: Container(
                 width: 250,
                 height: 70,

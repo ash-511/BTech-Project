@@ -25,13 +25,14 @@ class _DisplayPictureState extends State<DisplayPicture> {
 
   @override
   Widget build(BuildContext context) {
-    // Future _speak(String text) async{
-    //   await flutterTts.speak(text);
-    // }
     return Scaffold(
-        appBar: AppBar(title: const Text('Display the Picture')),
-    // The image is stored as a file on the device. Use the `Image.file`
-    // constructor with the given path to display the image.
+        appBar: AppBar(title: const Text('Image Captioning'),
+            backgroundColor: Color(0XFF040045),
+            leading: CircleAvatar(
+              radius: 40,
+              backgroundImage: AssetImage('images/Iris_logo.jpeg'),
+            )),
+
     body: Column(children: [
       Image.file(File(widget.imagePath),
         height: 500,

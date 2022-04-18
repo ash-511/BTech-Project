@@ -4,63 +4,68 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'screen2.dart';
-import 'package:alan_voice/alan_voice.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:camera/camera.dart';
 
 class TextDetection extends StatefulWidget {
+  final List<CameraDescription>? cameras;
+  const TextDetection({this.cameras,Key? key,}) : super(key: key);
+
   @override
   _TextDetectionState createState() => _TextDetectionState();
 }
 
 class _TextDetectionState extends State<TextDetection> {
+  late CameraController controller;
+  File? file;
+  Future getImage() async {
+    final pickedFile = await controller.takePicture();
+    file = File(pickedFile!.path);
+    print("inside get image");
+    scanText(file);
+    setState(() {});
+  }
 
-  _TextDetectionState() {
+  Future scanText(File? file) async {
+    final inputImage = InputImage.fromFile(file!);
+    final textDetector = GoogleMlKit.vision.textDetector();
+    final RecognisedText recognisedText = await textDetector.processImage(
+        inputImage);
 
-    String sdkKey = "f4b5ec72bdd281a7780bdbb62601ddf42e956eca572e1d8b807a3e2338fdd0dc/stage";
-
-    Future<void> _handleCommand(Map<String, dynamic> command) async {
-      switch (command["command"]) {
-        case 'scan':
-        //Future scanText() async {
-          final inputImage = InputImage.fromFile(File(_image!.path));
-          final textDetector = GoogleMlKit.vision.textDetector();
-          final RecognisedText recognisedText = await textDetector.processImage(inputImage);
-
-          for (TextBlock block in recognisedText.blocks) {
-            for (TextLine line in block.lines)
-            {
-              for (TextElement element in line.elements) {
-                result = result + '  ' + element.text;
-              }
-              result = result + ' ';
-            }
-          }
-          //print("inside scan");
-          Navigator.of(context).pop();
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => Details(result)));
-          //}
-          break;
-        default:
-          debugPrint("Unknown command: ${command}");
+    for (TextBlock block in recognisedText.blocks) {
+      for (TextLine line in block.lines) {
+        for (TextElement element in line.elements) {
+          result = result + '  ' + element.text;
+        }
+        result = result + ' ';
       }
     }
-    AlanVoice.addButton(sdkKey,buttonAlign: AlanVoice.BUTTON_ALIGN_LEFT);
-    AlanVoice.onCommand.add((command) => _handleCommand(command.data));
-
+    //print("inside scan");
+    Navigator.of(context).pop();
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Details(result)));
   }
-  String _text = '';
-  String result="";
+
+  String result = "";
   PickedFile? _image;
   final picker = ImagePicker();
   FlutterTts flutterTts = FlutterTts();
-  String instruction="The image will be captured in a few seconds. After the image is captured, press the alan AI button on the bottom left corner of the screen and give the command, scan.";
-
+  String instruction = "The image will be captured in a few seconds. Hold up your phone such that a clear image can be captured.";
 
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 10000), () async{
+    controller = CameraController(
+      widget.cameras![0],
+      ResolutionPreset.max,
+    );
+    controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+    Timer(Duration(milliseconds: 10000), () async {
       getImage();
       setState(() {});
     });
@@ -69,34 +74,49 @@ class _TextDetectionState extends State<TextDetection> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (!controller.value.isInitialized) {
+      return const SizedBox(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text('Text Recognition'),
+          backgroundColor: Color(0XFF040045),
+          leading: CircleAvatar(
+            radius: 40,
+            backgroundImage: AssetImage('images/Iris_logo.jpeg'),
+          ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: getImage,
-          child: Icon(Icons.add_a_photo),
+        body: Center(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: SizedBox(
+                    height: 710,
+                    width: 500,
+                    child: CameraPreview(controller),
+                  ),
+                ),
+              ),
+              if (_image != null)
+                Image.file(File(_image!.path),
+                  height: 200,
+                  width: 400,),
+            ],
+          ),
         ),
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          child: _image != null
-              ? Image.file(
-            File(_image!.path),
-            fit: BoxFit.fitWidth,
-          )
-              : Container(child: Text(instruction),),
-        ));
-  }
-  Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
-    setState(() {
-      if (pickedFile != null) {
-        _image = pickedFile;
-      } else {
-        print('No image selected');
-      }
-    });
+    );
   }
 }

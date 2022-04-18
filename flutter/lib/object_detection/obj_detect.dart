@@ -94,7 +94,7 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
     }
     return Scaffold(
         appBar: AppBar(
-            title: Text('Iris'),
+            title: Text('Object Detection'),
             leading: CircleAvatar(
               radius: 40,
               backgroundImage: AssetImage('images/Iris_logo.jpeg'),
@@ -107,7 +107,7 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: SizedBox(
-                    height: 700,
+                    height: 710,
                     width: 500,
                     child: CameraPreview(controller),
                   ),

@@ -28,22 +28,18 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("News App", style: TextStyle(color: Colors.black)),
-        backgroundColor: Colors.white,
+        title: Text("Daily News"),
+          backgroundColor: Color(0XFF040045),
+          leading: CircleAvatar(
+            radius: 40,
+            backgroundImage: AssetImage('images/Iris_logo.jpeg'),
+          )
       ),
-
-      //Now let's call the APi services with future builder widget
       body: FutureBuilder(
         future: client.getArticle(),
         builder: (BuildContext context, AsyncSnapshot<List<Article>> snapshot) {
-          //let's check if we got a response or not
           if (snapshot.hasData) {
-            //Now let's make a list of articles
             List<Article>? articles = snapshot.data;
-            // for (var news in articles!) {
-            //   print(news);
-            // }
-            //news=articles?articles[0].title:"hello";
             if (articles==null){
               return Container(
               );
@@ -59,7 +55,6 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
             return Column(
               children: [
                 Expanded(child:ListView.builder(
-                  //Now let's create our custom List tile
                   itemCount: articles.length,
                   itemBuilder: (context, index) =>
                       customListTile(articles[index], context),
