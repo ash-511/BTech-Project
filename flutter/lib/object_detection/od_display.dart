@@ -29,7 +29,8 @@ class _ODDisplayPictureState extends State<ODDisplayPicture> {
     //   await flutterTts.speak(text);
     // }
     return Scaffold(
-        appBar: AppBar(title: const Text('Object Detection'),
+        appBar: AppBar(title: const Text('Object Detection',
+          style: TextStyle(fontFamily: 'NotoSans', fontWeight: FontWeight.w400),),
             backgroundColor: Color(0XFF040045),
             leading: CircleAvatar(
               radius: 40,
@@ -39,11 +40,20 @@ class _ODDisplayPictureState extends State<ODDisplayPicture> {
         // The image is stored as a file on the device. Use the `Image.file`
         // constructor with the given path to display the image.
         body: Column(children: [
+          SizedBox(height: 30,),
           Image.file(File(widget.imagePath),
             height: 500,
             width: 500,),
           SizedBox(height: 20,),
-          Container(child: Text(widget.message, style: TextStyle(fontSize: 15),)),
+          Container(child: Text("Objects Detected:", style: TextStyle(fontWeight: FontWeight.w500,
+              fontFamily: 'NotoSans',
+              fontSize: 20.0),),),
+          SizedBox(height: 10,),
+          Container(child: Text(widget.message, style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontFamily: 'NotoSans',
+              fontSize: 18.0
+          ),),),
           // ElevatedButton(onPressed: () async {await _speak(widget.message);} ,
           //     child: Text("Speak"))
         ],)

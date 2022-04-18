@@ -94,7 +94,8 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
     }
     return Scaffold(
         appBar: AppBar(
-            title: Text('Object Detection'),
+            title: Text('Object Detection',
+              style: TextStyle(fontFamily: 'NotoSans', fontWeight: FontWeight.w400),),
             leading: CircleAvatar(
               radius: 40,
               backgroundImage: AssetImage('images/Iris_logo.jpeg'),

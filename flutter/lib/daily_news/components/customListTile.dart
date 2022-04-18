@@ -12,8 +12,8 @@ Widget customListTile(Article article, BuildContext context) {
           borderRadius: BorderRadius.circular(12.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black12,
-              blurRadius: 3.0,
+              color: Colors.black38,
+              blurRadius: 7.0,
             ),
           ]),
       child: Column(
@@ -23,13 +23,14 @@ Widget customListTile(Article article, BuildContext context) {
           Container(
             padding: EdgeInsets.all(6.0),
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: Color(0XFFA1AFFF),
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: Text(
               article.source.name,
               style: TextStyle(
-                color: Colors.white,
+                fontFamily: 'NotoSans',
+                fontWeight: FontWeight.w500
               ),
             ),
           ),
@@ -39,8 +40,8 @@ Widget customListTile(Article article, BuildContext context) {
           Text(
             article.title,
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0,
+              fontWeight: FontWeight.w500,
+              fontSize: 15.0,
             ),
           )
         ],

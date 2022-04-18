@@ -81,7 +81,8 @@ class _ImageCaptioningPageState extends State<ImageCaptioningPage> {
       }
       return Scaffold(
           appBar: AppBar(
-              title: Text('Image Captioning'),
+              title: Text('Image Captioning',
+                style: TextStyle(fontFamily: 'NotoSans', fontWeight: FontWeight.w400),),
               leading: CircleAvatar(
                 radius: 40,
                 backgroundImage: AssetImage('images/Iris_logo.jpeg'),

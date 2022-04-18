@@ -60,7 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Iris"),
+          title: Text("Iris",
+            style: TextStyle(
+                fontFamily: 'NotoSans',
+              fontWeight: FontWeight.w400),
+          ),
           backgroundColor: Color(0XFF040045),
           leading: CircleAvatar(
             radius: 40,
@@ -70,6 +74,18 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            CircleAvatar(
+              radius: 85,
+              backgroundImage:AssetImage('images/Iris_logo.jpeg') ,
+            ),
+            Container(child: Text("IRIS",
+              style: TextStyle(
+                  fontSize: 35,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'NotoSans',
+              ),
+            ),
+            ),
             GestureDetector(
               onTap: () async{
                 await availableCameras().then(
@@ -83,18 +99,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 250,
                 height: 70,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: 5.0,
+                      ),
+                    ],
                     color: Color(0XFFA1AFFF)),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    "Object Detection",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color(0XFF040045),
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500),
-                  ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15.0,
+                    ),
+                    Icon(Icons.visibility),
+                    SizedBox(
+                      width: 17.0,
+                    ),
+                    Text("Object Detection",
+                      style: TextStyle(
+                          fontFamily: 'NotoSans',
+                          fontWeight: FontWeight.w500,
+                      fontSize: 20.0),)
+                  ],
                 ),
               ),
             ),
@@ -111,18 +138,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 250,
                 height: 70,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: 5.0,
+                      ),
+                    ],
                     color: Color(0XFFA1AFFF)),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    "Image Captioning",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color(0XFF040045),
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500),
-                  ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15.0,
+                    ),
+                    Icon(Icons.image),
+                    SizedBox(
+                      width: 17.0,
+                    ),
+                    Text("Image captioning",
+                      style: TextStyle(
+                          fontFamily: 'NotoSans',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.0),)
+                  ],
                 ),
               ),
             ),
@@ -142,18 +180,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 250,
                 height: 70,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: 5.0,
+                      ),
+                    ],
                     color: Color(0XFFA1AFFF)),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    "Text Detection",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color(0XFF040045),
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500),
-                  ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15.0,
+                    ),
+                    Icon(Icons.description),
+                    SizedBox(
+                      width: 17.0,
+                    ),
+                    Text("Text Recognition",
+                      style: TextStyle(
+                          fontFamily: 'NotoSans',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.0),)
+                  ],
                 ),
               ),
             ),
@@ -168,18 +217,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 250,
                 height: 70,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: 5.0,
+                      ),
+                    ],
                     color: Color(0XFFA1AFFF)),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    "Daily News",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color(0XFF040045),
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500),
-                  ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15.0,
+                    ),
+                    Icon(Icons.newspaper),
+                    SizedBox(
+                      width: 17.0,
+                    ),
+                    Text("Daily News",
+                      style: TextStyle(
+                          fontFamily: 'NotoSans',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.0),)
+                  ],
                 ),
               ),
             ),

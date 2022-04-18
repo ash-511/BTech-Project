@@ -28,7 +28,8 @@ class _DailyNewsPageState extends State<DailyNewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Daily News"),
+        title: Text("Daily News",
+            style: TextStyle(fontFamily: 'NotoSans', fontWeight: FontWeight.w400),),
           backgroundColor: Color(0XFF040045),
           leading: CircleAvatar(
             radius: 40,

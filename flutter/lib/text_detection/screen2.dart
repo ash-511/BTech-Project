@@ -37,7 +37,8 @@ class _DetailsState extends State<Details> {
     return Scaffold(
         key: _key,
         appBar: AppBar(
-          title: Text('Text Recognition'),
+          title: Text('Text Recognition',
+            style: TextStyle(fontFamily: 'NotoSans', fontWeight: FontWeight.w400),),
             backgroundColor: Color(0XFF040045),
             leading: CircleAvatar(
               radius: 40,
@@ -46,15 +47,25 @@ class _DetailsState extends State<Details> {
         ),
         body: Column(
           children: [
+            SizedBox(height: 20.0,),
+            Container(child: Text("Scanned Text:",
+              style: TextStyle(
+                  fontFamily: 'NotoSans',
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w500),),),
             Container(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(15),
               alignment: Alignment.center,
-              height: 500,
+              height: 710,
               width: 500,
               child: SelectableText(
-                  widget.text.isEmpty ? 'No Text Available' : widget.text),
+                  widget.text.isEmpty ? 'No Text Available' : widget.text,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'NotoSans',
+                  fontSize: 15.0
+                ),),
             ),
-
           ],
         )
     );
